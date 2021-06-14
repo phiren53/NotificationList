@@ -1,0 +1,98 @@
+﻿@model IEnumerable<NotificationList.Models.Entity>
+
+<br>
+<label>Search:</label>
+
+<input class="search" type="search" data-column="all">
+<br>
+<div id="entitylist">
+    <table id="entityTable" class="tablesorter table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PARENT_RECORD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ENT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SSN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BIRTHDATE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EIN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MERGED_ADDRESS)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PARENT_RECORD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ENT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BIRTHDATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MERGED_ADDRESS)
+                </td>
+                <td>
+                    @*<button name="markban" id="btnMarkBan" value="@item.PARENT_RECORD">Mark Ban</button>*@
+                    @*@Html.Action("OGSSN_flgUpdate", "OGSSN", new { id = item.CRA_UNIQUE_ID.ToString() })*@
+                    <button id="btnMarkBan" onclick="onButtonClick('Y', @item.PARENT_RECORD)">Mark Ban</button>
+                    @*@using (Html.BeginForm("OGSSN_flgUpdate", "OverGroup", new { parentrecordid = @item.PARENT_RECORD, databasename = ViewBag.DatabaseName }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="parentRecord" value="@item.PARENT_RECORD" />
+                        <button name="markban">Mark Ban</button>
+                    }*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/tablesorter")
+
+<script type="text/javascript">
+    var databasename = document.getElementById("txtDBName").value;
+    $(function () {
+        $("#entityTable").tablesorter();
+    });
+
+    var $table = $('table').tablesorter({
+        theme: 'blue',
+        widgets: ["zebra", "filter"],
+        widgetOptions: {
+            // filter_anyMatch replaced! Instead use the filter_external option
+            // Set to use a jQuery selector (or jQuery object) pointing to the
+            // external filter (column specific or any match)
+            filter_external: '.search',
+            // add a default type search to the first name column
+            filter_defaultFilter: { 1: '~{query}' },
+            // include column filters
+            filter_columnFilters: true,
+            filter_placeholder: { search: 'Search...' },
+            filter_saveFilters: false,
+            filter_reset: '.reset'
+        }
+    });
+
+
+</script>
+

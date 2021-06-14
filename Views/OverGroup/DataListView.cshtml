@@ -1,0 +1,116 @@
+﻿@model IEnumerable<NotificationList.Models.OverGroup>
+
+<br>
+<label>Search:</label>
+<input class="search" type="search" data-column="all">
+<br>
+<div id="datalist">
+    <table id="datalistTable" class="tablesorter table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.relativityid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CRA_UNIQUE_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CRA_PARENT_RECORD_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FIRSTNAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MIDDLENAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LASTNAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SSN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BIRtHDATE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EIN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CRA_MERGED_ADDRESS)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.relativityid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CRA_UNIQUE_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CRA_PARENT_RECORD_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIRSTNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MIDDLENAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LASTNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BIRtHDATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CRA_MERGED_ADDRESS)
+                </td>
+                <td>
+                    
+                    <button id="btnMarkBan" onclick="onButtonClick('Y', @item.CRA_UNIQUE_ID)">Mark Ban</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/tablesorter")
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#datalistTable").tablesorter();
+    });
+
+    var $table = $('table').tablesorter({
+        theme: 'blue',
+        widgets: ["zebra", "filter"],
+        widgetOptions: {
+            // filter_anyMatch replaced! Instead use the filter_external option
+            // Set to use a jQuery selector (or jQuery object) pointing to the
+            // external filter (column specific or any match)
+            filter_external: '.search',
+            // add a default type search to the first name column
+            filter_defaultFilter: { 1: '~{query}' },
+            // include column filters
+            filter_columnFilters: true,
+            filter_placeholder: { search: 'Search...' },
+            filter_saveFilters: false,
+            filter_reset: '.reset'
+        }
+    });
+
+    
+
+</script>
+
