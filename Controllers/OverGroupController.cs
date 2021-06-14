@@ -19,7 +19,7 @@ namespace NotificationList.Controllers
             string connectionstring = GetConnectionString(databaseName);
             string OGSSN_Query = string.Empty;
             OverGroupDAO ogdao = new OverGroupDAO();
-
+            //GitTesting.
             if (IsUpdateReviewFlag == "Y")
             {
                 string updateReviewFlagQuery = "update FULL_POPULATION set middlename = 'true' where CRA_UNIQUE_ID = " + cra_uniqueid;
