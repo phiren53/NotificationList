@@ -16,25 +16,25 @@
            id="btnDBConnect"
            value="Connect Database"
            onclick=onButtonClick() />
-    
+
 </p>
 <div id="tabs">
     <ul class="nav nav-tabs">
-        <li class="nav active"><a data-toggle="tab" href="#home" id="default">ISPs</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu1" id="tabSSN">SSN</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu2" id="tabDOB">DOB</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu3" id="tabFN">FirstName</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu4" id="tabLN">LastName</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu5" id="tabFNLN">FirstName & LastName</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu6" id="tabSubPopulation">Sub Population</a></li>
-        <li class="nav"><a data-toggle="tab" href="#menu7" id="tabFullPopulation">Full Population</a></li>
+        @*<li class="nav active"><a data-toggle="tab" href="#home" id="default">ISPs</a></li>*@
+        <li class="nav active"><a data-toggle="tab" href="#menu1" id="tabSSN">OverGroup SSN</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu2" id="tabDOB">OverGroup DOB</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu3" id="tabFN">OverGroup FirstName</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu4" id="tabLN">OverGroup LastName</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu5" id="tabFNLN">OverGroup FirstName & LastName</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu6" id="tabSubPopulation">OverGroup Sub Population</a></li>
+        <li class="nav"><a data-toggle="tab" href="#menu7" id="tabFullPopulation">OverGroup Full Population</a></li>
         <li class="nav"><a data-toggle="tab" href="#menu8" id="tabEntity">Entity</a></li>
     </ul>
     <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+        @*<div id="home" class="tab-pane fade in active">
             @Html.Partial("DataListView")
-        </div>
-        <div id="menu1" class="tab-pane fade">
+        </div>*@
+        <div id="menu1" class="tab-pane fade in active">
         </div>
         <div id="menu2" class="tab-pane fade">
         </div>
@@ -66,7 +66,11 @@
         currId = $(e.target).attr("id");
         currDivID = e.target.hash;
         currDatabase = document.getElementById("txtDBName").value;
-        debugger;
+
+        if (currDatabase == undefined || currDatabase == null || currDatabase.trim() == "") {
+            return;
+        }
+
         $.ajax({
             url: '/OverGroup/OGSSN',
             contentType: 'application/html; charset=utf-8',
@@ -75,7 +79,9 @@
                 tabIdName: currId,
                 databaseName: currDatabase,
                 IsUpdateReviewFlag: "",
-                cra_uniqueid: ""
+                cra_parentrecordid: "",
+                cra_uniqueid: "",
+
             },
             dataType: 'html',
             success: function (result) {
@@ -85,11 +91,17 @@
     });
 
 
-    function onButtonClick(isUpdateReviewFlg, cra_uniqueid) {
+    function onButtonClick(isUpdateReviewFlg,cra_parentrecordid, cra_uniqueid) {
         debugger;
-        if (currId == undefined) currId = "default";
-        if (currDivID == undefined) currDivID = "#home";
+        
+        if (currId == undefined) currId = "tabSSN";
+        if (currDivID == undefined) currDivID = "#menu1";
         currDatabase = document.getElementById("txtDBName").value;
+        if (currDatabase == null || currDatabase.trim() == "" || currDatabase == undefined) {
+            alert("Please enter a database name.");
+            return;
+        }
+
         $.ajax({
             url: '/OverGroup/OGSSN',
             contentType: 'application/html; charset=utf-8',
@@ -98,7 +110,9 @@
                 tabIdName: currId,
                 databaseName: currDatabase,
                 IsUpdateReviewFlag: (isUpdateReviewFlg == undefined ? "" : isUpdateReviewFlg),
+                cra_parentrecordid: cra_parentrecordid,
                 cra_uniqueid: cra_uniqueid
+                
             },
             dataType: 'html',
             success: function (result) {

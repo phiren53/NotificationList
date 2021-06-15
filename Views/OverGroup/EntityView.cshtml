@@ -52,14 +52,8 @@
                     @Html.DisplayFor(modelItem => item.MERGED_ADDRESS)
                 </td>
                 <td>
-                    @*<button name="markban" id="btnMarkBan" value="@item.PARENT_RECORD">Mark Ban</button>*@
-                    @*@Html.Action("OGSSN_flgUpdate", "OGSSN", new { id = item.CRA_UNIQUE_ID.ToString() })*@
-                    <button id="btnMarkBan" onclick="onButtonClick('Y', @item.PARENT_RECORD)">Mark Ban</button>
-                    @*@using (Html.BeginForm("OGSSN_flgUpdate", "OverGroup", new { parentrecordid = @item.PARENT_RECORD, databasename = ViewBag.DatabaseName }, FormMethod.Post))
-                    {
-                        <input type="hidden" name="parentRecord" value="@item.PARENT_RECORD" />
-                        <button name="markban">Mark Ban</button>
-                    }*@
+                    <button id="btnMarkBan" onclick="onButtonClick('Y', @item.PARENT_RECORD,'')">Mark Ban</button>
+
                 </td>
             </tr>
         }

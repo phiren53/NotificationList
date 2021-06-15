@@ -21,16 +21,16 @@ namespace NotificationList.Controllers.DAO
                     while (reader.Read())
                     {
                         OverGroup np = new OverGroup();
-                        np.relativityid = reader.GetString(0);
-                        np.CRA_UNIQUE_ID = reader.GetString(1);
-                        np.CRA_PARENT_RECORD_ID = reader.GetString(2);
-                        np.FIRSTNAME = reader.GetString(3);
-                        np.MIDDLENAME = reader.GetString(4);
-                        np.LASTNAME = reader.GetString(5);
-                        np.SSN = reader.GetString(6);
-                        np.BIRtHDATE = reader.GetString(7);
-                        np.EIN = reader.GetString(8);
-                        np.CRA_MERGED_ADDRESS = reader.GetString(9);
+                        np.relativityid = reader.IsDBNull(0) ? "" : reader.GetString(0);
+                        np.CRA_UNIQUE_ID = reader.IsDBNull(1) ? "" : reader.GetString(1);
+                        np.CRA_PARENT_RECORD_ID = reader.IsDBNull(2) ? "" : reader.GetString(2);
+                        np.FIRSTNAME = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                        np.MIDDLENAME = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                        np.LASTNAME = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                        np.SSN = reader.IsDBNull(6) ? "" : reader.GetString(6);
+                        np.BIRtHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
+                        np.EIN = reader.IsDBNull(8) ? "" : reader.GetString(8);
+                        np.CRA_MERGED_ADDRESS = reader.IsDBNull(9) ? "" : reader.GetString(9);
 
                         return_list.Add(np);
                     }
@@ -61,7 +61,7 @@ namespace NotificationList.Controllers.DAO
                         np.BIRTHDATE = reader.IsDBNull(3) ? "" : reader.GetString(3);
                         np.EIN = reader.IsDBNull(4) ? "" : reader.GetString(4);
                         np.MERGED_ADDRESS = reader.IsDBNull(5) ? "" : reader.GetString(5);
-                        
+
                         return_list.Add(np);
                     }
                 }
@@ -70,6 +70,44 @@ namespace NotificationList.Controllers.DAO
                 return return_list;
             }
         }
+
+        internal List<NotificationPopulation> FetchNotificationPopulation(string connectionstring, string queryString)
+        {
+            List<NotificationPopulation> return_list = new List<NotificationPopulation>();
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        
+                        NotificationPopulation np = new NotificationPopulation();
+                        np.CRA_PARENT_RECORD_ID = reader.IsDBNull(0) ? "" : reader.GetString(0);
+                        np.FIRSTNAME = reader.IsDBNull(1) ? "" : reader.GetString(1);
+                        np.MIDDLENAME = reader.IsDBNull(2) ? "" : reader.GetString(2);
+                        np.LASTNAME = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                        np.Suffix = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                        np.Entity = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                        np.SSN = reader.IsDBNull(6) ? "" : reader.GetString(6);
+                        np.BIRtHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
+                        np.EIN = reader.IsDBNull(8) ? "" : reader.GetString(8);
+                        np.CRA_MERGED_ADDRESS = reader.IsDBNull(9) ? "" : reader.GetString(9);
+                        
+
+                        return_list.Add(np);
+                    }
+                }
+                reader.Close();
+                command.Connection.Close();
+                return return_list;
+            }
+        }
+
 
         internal bool UpdateReviewFlag(string connectionstring, string queryString)
         {

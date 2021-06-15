@@ -1,19 +1,14 @@
-﻿@model IEnumerable<NotificationList.Models.OverGroup>
+﻿@model IEnumerable<NotificationList.Models.NotificationPopulation>
 
 <br>
 <label>Search:</label>
+
 <input class="search" type="search" data-column="all">
 <br>
-<div id="datalist">
-    <table id="datalistTable" class="tablesorter table">
+<div id="NotificationPopulationlist">
+    <table id="NPListTable" class="tablesorter table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.relativityid)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CRA_UNIQUE_ID)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CRA_PARENT_RECORD_ID)
                 </th>
@@ -38,18 +33,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CRA_MERGED_ADDRESS)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Suffix)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Entity)
+                </th>
                 <th></th>
             </tr>
         </thead>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.relativityid)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CRA_UNIQUE_ID)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CRA_PARENT_RECORD_ID)
                 </td>
@@ -75,21 +70,27 @@
                     @Html.DisplayFor(modelItem => item.CRA_MERGED_ADDRESS)
                 </td>
                 <td>
-
-                    <button id="btnMarkBan" onclick="onButtonClick('Y','', @item.CRA_UNIQUE_ID)">Mark Ban</button>
+                    @Html.DisplayFor(modelItem => item.Suffix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Entity)
+                </td>
+                <td>
+                    <button id="btnMarkBan" onclick="onButtonClick('Y', @item.CRA_PARENT_RECORD_ID, '')">Mark Ban</button>
                 </td>
             </tr>
         }
 
     </table>
 </div>
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/tablesorter")
 
 <script type="text/javascript">
-
+    var databasename = document.getElementById("txtDBName").value;
     $(function () {
-        $("#datalistTable").tablesorter();
+        $("#NPListTable").tablesorter();
     });
 
     var $table = $('table').tablesorter({
@@ -111,6 +112,4 @@
     });
 
 
-
 </script>
-
