@@ -159,7 +159,7 @@ namespace NotificationList.Queries
 
         public string UpdateReviewFlagQuery(string cra_uniqueid,string cra_parentrecordid)
         {
-            string updateReviewFlagQuery = "update FULL_POPULATION set middlename = 'true' where ";
+            string updateReviewFlagQuery = "update Review set review_flg = 'true' where ";
             if (!string.IsNullOrEmpty(cra_uniqueid))
             {
                 updateReviewFlagQuery += " CRA_UNIQUE_ID = " + cra_uniqueid;
