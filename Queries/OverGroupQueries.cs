@@ -137,7 +137,7 @@ namespace NotificationList.Queries
                     OGSSN_Query = OGSSN_Query + ", EIN " + "\n";
                     OGSSN_Query = OGSSN_Query + ", MERGED_ADDRESs " + "\n";
                     OGSSN_Query = OGSSN_Query + "from NOTIFICATION_POPULATION " + "\n";
-                    OGSSN_Query = OGSSN_Query + "where entity = '' " + "\n";
+                    OGSSN_Query = OGSSN_Query + "where isnull(entity,'')  = '' " + "\n";
                     OGSSN_Query = OGSSN_Query + "order by lastname, firstname, entity";
                     break;
                 case "tabEntity":
@@ -159,12 +159,17 @@ namespace NotificationList.Queries
 
         public string UpdateReviewFlagQuery(string cra_uniqueid,string cra_parentrecordid)
         {
-            string updateReviewFlagQuery = "update Review set review_flg = 'true' where ";
-            if (!string.IsNullOrEmpty(cra_uniqueid))
+            string updateReviewFlagQuery = "update Review set review_flg = case when review_flg = 'true' then 'false' else 'true' end where ";
+            if (!string.IsNullOrEmpty(cra_uniqueid) && !string.IsNullOrEmpty(cra_parentrecordid))
+            {
+                updateReviewFlagQuery += " CRA_UNIQUE_ID = " + cra_uniqueid;
+                updateReviewFlagQuery += " AND CRA_PARENT_RECORD_ID = " + cra_parentrecordid;
+            }
+            else if (!string.IsNullOrEmpty(cra_uniqueid))
             {
                 updateReviewFlagQuery += " CRA_UNIQUE_ID = " + cra_uniqueid;
             }
-            if (!string.IsNullOrEmpty(cra_parentrecordid))
+            else if (!string.IsNullOrEmpty(cra_parentrecordid))
             {
                 updateReviewFlagQuery += " CRA_PARENT_RECORD_ID = " + cra_parentrecordid;
             }
