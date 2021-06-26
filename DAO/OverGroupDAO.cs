@@ -28,9 +28,10 @@ namespace NotificationList.Controllers.DAO
                         np.MIDDLENAME = reader.IsDBNull(4) ? "" : reader.GetString(4);
                         np.LASTNAME = reader.IsDBNull(5) ? "" : reader.GetString(5);
                         np.SSN = reader.IsDBNull(6) ? "" : reader.GetString(6);
-                        np.BIRtHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
+                        np.BIRTHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
                         np.EIN = reader.IsDBNull(8) ? "" : reader.GetString(8);
                         np.CRA_MERGED_ADDRESS = reader.IsDBNull(9) ? "" : reader.GetString(9);
+                        np.Review_Flag = reader.IsDBNull(10) ? "" : reader.GetString(10);
 
                         return_list.Add(np);
                     }
@@ -61,6 +62,7 @@ namespace NotificationList.Controllers.DAO
                         np.BIRTHDATE = reader.IsDBNull(3) ? "" : reader.GetString(3);
                         np.EIN = reader.IsDBNull(4) ? "" : reader.GetString(4);
                         np.MERGED_ADDRESS = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                        np.Review_Flag = reader.IsDBNull(6) ? "" : reader.GetString(6);
 
                         return_list.Add(np);
                     }
@@ -94,10 +96,10 @@ namespace NotificationList.Controllers.DAO
                         np.Suffix = reader.IsDBNull(4) ? "" : reader.GetString(4);
                         np.Entity = reader.IsDBNull(5) ? "" : reader.GetString(5);
                         np.SSN = reader.IsDBNull(6) ? "" : reader.GetString(6);
-                        np.BIRtHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
+                        np.BIRTHDATE = reader.IsDBNull(7) ? "" : reader.GetString(7);
                         np.EIN = reader.IsDBNull(8) ? "" : reader.GetString(8);
                         np.CRA_MERGED_ADDRESS = reader.IsDBNull(9) ? "" : reader.GetString(9);
-                        
+                        np.Review_Flag = reader.IsDBNull(10) ? "" : reader.GetString(10);
 
                         return_list.Add(np);
                     }

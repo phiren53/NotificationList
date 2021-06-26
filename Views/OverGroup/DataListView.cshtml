@@ -30,7 +30,7 @@
                     @Html.DisplayNameFor(model => model.SSN)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BIRtHDATE)
+                    @Html.DisplayNameFor(model => model.BIRTHDATE)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.EIN)
@@ -66,7 +66,7 @@
                     @Html.DisplayFor(modelItem => item.SSN)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BIRtHDATE)
+                    @Html.DisplayFor(modelItem => item.BIRTHDATE)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EIN)
@@ -76,7 +76,7 @@
                 </td>
                 <td>
 
-                    <button id="btnMarkBan" onclick="onButtonClick('Y',@item.CRA_PARENT_RECORD_ID, @item.CRA_UNIQUE_ID)">Mark Bad</button>
+                    <button id="btnMarkBan" onclick="onButtonClick('Y',@item.CRA_PARENT_RECORD_ID, @item.CRA_UNIQUE_ID)">@item.Review_Flag</button>
                 </td>
             </tr>
         }

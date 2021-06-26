@@ -14,9 +14,11 @@ namespace NotificationList.Models
         public string MIDDLENAME { get; set; }
         public string LASTNAME { get; set; }
         public string SSN { get; set; }
-        public string BIRtHDATE { get; set; }
+        public string BIRTHDATE { get; set; }
         public string EIN { get; set; }
         public string CRA_MERGED_ADDRESS { get; set; }
+
+        public string Review_Flag { get; set; }
 
         public OverGroup()
         {
@@ -27,9 +29,10 @@ namespace NotificationList.Models
             MIDDLENAME = "NA";
             LASTNAME = "NA";
             SSN = "NA";
-            BIRtHDATE = "NA";
+            BIRTHDATE = "NA";
             EIN = "NA";
             CRA_MERGED_ADDRESS = "NA";
+            Review_Flag = "NA";
         }
 
     }
@@ -42,6 +45,7 @@ namespace NotificationList.Models
         public string BIRTHDATE { get; set; }
         public string EIN { get; set; }
         public string MERGED_ADDRESS { get; set; }
+        public string Review_Flag { get; set; }
 
         public Entity()
         {
@@ -51,6 +55,7 @@ namespace NotificationList.Models
             BIRTHDATE = "";
             EIN = "";
             MERGED_ADDRESS = "";
+            Review_Flag = "";
         }
     }
 
@@ -62,11 +67,12 @@ namespace NotificationList.Models
         public string MIDDLENAME { get; set; }
         public string LASTNAME { get; set; }
         public string SSN { get; set; }
-        public string BIRtHDATE { get; set; }
+        public string BIRTHDATE { get; set; }
         public string EIN { get; set; }
         public string CRA_MERGED_ADDRESS { get; set; }
         public string Suffix { get; set; }
         public string Entity { get; set; }
+        public string Review_Flag { get; set; }
 
         public NotificationPopulation()
         {
@@ -77,9 +83,10 @@ namespace NotificationList.Models
             Suffix = "NA";
             Entity = "NA";
             SSN = "NA";
-            BIRtHDATE = "NA";
+            BIRTHDATE = "NA";
             EIN = "NA";
             CRA_MERGED_ADDRESS = "NA";
+            Review_Flag = "";
         }
     }
 
